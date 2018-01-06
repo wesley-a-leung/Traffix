@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>data/gridDemo.txt</file>
+        <file>data/diagonalGridDemo.txt</file>
+    </qresource>
+</RCC>
