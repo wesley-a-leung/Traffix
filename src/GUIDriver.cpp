@@ -34,7 +34,7 @@ GUIDriver::GUIDriver(int argc, char *argv[], double iterationsPerSecond, string 
     this->iterationsPerSecond = iterationsPerSecond;
     iterationLength = 1.0 / iterationsPerSecond;
     if (random) {
-        cg = new CityGenerator(topLeft, topRight, bottomLeft, bottomRight, SEED);
+        cg = new GridCityGenerator(topLeft, topRight, bottomLeft, bottomRight, SEED);
         G = cg->getGraph();
         if (controllerType == 0) controller = new PretimedController(G);
         else if (controllerType == 1) controller = new BasicController(G);

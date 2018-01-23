@@ -6,6 +6,7 @@
 #include <QEventLoop>
 #include "gui/gui.h"
 #include "CityGenerator.h"
+#include "GridCityGenerator.h"
 #include "controller/Controller.h"
 #include "Simulation.h"
 #include "framework/Framework.h"
@@ -18,7 +19,7 @@ private:
     QApplication *app; // the QApplication
     QEventLoop *eventLoop; // to update the display
     GUI *gui; // the GUI object
-    CityGenerator *cg; // the city generator
+    GridCityGenerator *cg; // the city generator
     Controller *controller; // the traffic controller
     Simulation *sim; // the simulation being run
     WeightedDigraph *G; // the city represented as a weighted directed graph

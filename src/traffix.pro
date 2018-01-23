@@ -21,6 +21,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         CityGenerator.cpp \
+        GridCityGenerator.cpp \
         ConsoleDriver.cpp \
         GUIDriver.cpp \
         Simulation.cpp \
@@ -38,6 +39,7 @@ SOURCES += \
 
 HEADERS += \
         CityGenerator.h \
+        GridCityGenerator.h \
         ConsoleDriver.h \
         GUIDriver.h \
         Simulation.h \
