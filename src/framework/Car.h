@@ -2,6 +2,7 @@
 #define CAR_H_
 
 #include <vector>
+#include <random>
 #include "Forward.h"
 #include "Point2D.h"
 #include "RoadSegment.h"
@@ -37,6 +38,8 @@ private:
 public:
     Car(Point2D &source, Point2D &destination, std::vector<RoadSegment*> &sourceRoads, std::vector<RoadSegment*> &destinationRoads, double currentTime, WeightedDigraph *G);
     ~Car();
+    static std::mt19937 generator;
+    static std::uniform_real_distribution<double> distribution;
     double startTime; // the starting time on the road's journey
     void updateEfficiency(double endTime);
     static double getEfficiency();

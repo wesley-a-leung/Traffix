@@ -2,6 +2,7 @@
 #define CITYGENERATOR_H
 
 #include <cmath>
+#include <random>
 #include "framework/Framework.h"
 
 #define MAX_DEPTH 8
@@ -16,6 +17,8 @@ struct CityGenerator {
 private:
     int seed;
     WeightedDigraph *G;
+    static std::mt19937 generator;
+    std::uniform_real_distribution<double> distribution;
     void generate(std::pair<RoadSegment*, RoadSegment*> top, std::pair<RoadSegment*, RoadSegment*> bottom,
         std::pair<RoadSegment*, RoadSegment*> left, std::pair<RoadSegment*, RoadSegment*> right, int depth);
 

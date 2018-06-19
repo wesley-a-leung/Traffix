@@ -6,12 +6,14 @@
 
 using namespace std;
 
+mt19937 CityGenerator::generator;
+
 /**
  * Constructs a CityGenerator object.
  */
-CityGenerator::CityGenerator(Point2D topLeft, Point2D topRight, Point2D bottomLeft, Point2D bottomRight, int seed) {
+CityGenerator::CityGenerator(Point2D topLeft, Point2D topRight, Point2D bottomLeft, Point2D bottomRight, int seed) : distribution(MIN_PARTITION, MAX_PARTITION) {
     this->seed = seed;
-    srand(seed);
+    generator.seed(seed);
     G = new WeightedDigraph();
     Intersection *topLeftIntxn = new Intersection(topLeft);
     Intersection *topRightIntxn = new Intersection(topRight);
@@ -56,9 +58,9 @@ WeightedDigraph *CityGenerator::getGraph() const { return G; };
 void CityGenerator::generate(pair<RoadSegment*, RoadSegment*> top, pair<RoadSegment*, RoadSegment*> bottom,
         pair<RoadSegment*, RoadSegment*> left, pair<RoadSegment*, RoadSegment*> right, int depth) {
     if (depth == MAX_DEPTH) return;
-    srand(seed * top.first->getID() * left.first->getID());
-    double factor1 = ((double) rand() / (RAND_MAX / (MAX_PARTITION - MIN_PARTITION))) + MIN_PARTITION;
-    double factor2 = ((double) rand() / (RAND_MAX / (MAX_PARTITION - MIN_PARTITION))) + MIN_PARTITION;
+    // srand(seed * top.first->getID() * left.first->getID()); // NOTE i left this here cause idk why Wesley has this here
+    double factor1 = distribution(generator);
+    double factor2 = distribution(generator);
     double speed = (MAX_SPEED_LIMIT - MIN_SPEED_LIMIT) / MAX_DEPTH * (MAX_DEPTH - depth) + MIN_SPEED_LIMIT;
     double capacity = (MAX_CAPACITY - MIN_CAPACITY) / MAX_DEPTH * (MAX_DEPTH - depth) + MIN_CAPACITY;
     Point2D topLeft = top.first->getSource()->getLocation();
@@ -106,6 +108,6 @@ void CityGenerator::generate(pair<RoadSegment*, RoadSegment*> top, pair<RoadSegm
         if ((depth - 1) % 4)generate(top, make_pair(leftwardRoad, rightwardRoad),
             make_pair(leftDownward.first, leftUpward.second), make_pair(rightDownward.first, rightUpward.second), depth + 1);
         else generate(make_pair(leftwardRoad, rightwardRoad), bottom,
-            make_pair(leftDownward.second, leftUpward.first), make_pair(rightDownward.second, rightUpward.first), depth + 1);       
+            make_pair(leftDownward.second, leftUpward.first), make_pair(rightDownward.second, rightUpward.first), depth + 1);
     }
 }

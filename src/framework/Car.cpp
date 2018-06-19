@@ -10,7 +10,8 @@ using namespace std;
 int Car::counter = 0; // counter starts at 0
 double Car::efficiency = 1.0;
 int Car::reached = 0;
-
+mt19937 Car::generator;
+uniform_real_distribution<double> Car::distribution(0, 1);
 /**
  * Initializes a car given the starting and ending point.
  * @param source the exact location of the source in the x, y plane
@@ -175,8 +176,9 @@ double Car::getEfficiency() { return efficiency; }
  * Returns a random road segment in the graph.
  */
 RoadSegment *getRandomRoadSegment(WeightedDigraph *G) {
+    uniform_int_distribution<int> intDistribution(0, G->countRoadSegments());
     while (true) {
-        int randIndex = rand() % G->countRoadSegments();
+        int randIndex = intDistribution(Car::generator);
         RoadSegment *r = G->getRoadSegment(G->getRoadSegmentID(randIndex));
         if (r->getCapacity() - r->getFlow() >= 1) return r;
     }
@@ -186,7 +188,7 @@ RoadSegment *getRandomRoadSegment(WeightedDigraph *G) {
  * Returns a random point on the road segment.
  */
 Point2D getRandomLocation(RoadSegment *r) {
-    double randDist = r->getLength() * rand() / RAND_MAX;
+    double randDist = r->getLength() * Car::distribution(Car::generator);
     Point2D srcLoc = r->getSource()->getLocation(), destLoc = r->getDestination()->getLocation();
     double angle = srcLoc.angleTo(destLoc);
     double dx = randDist * cos(angle);
