@@ -176,9 +176,10 @@ double Car::getEfficiency() { return efficiency; }
  * Returns a random road segment in the graph.
  */
 RoadSegment *getRandomRoadSegment(WeightedDigraph *G) {
-    uniform_int_distribution<int> intDistribution(0, G->countRoadSegments());
+    uniform_int_distribution<int> intDistribution(0, G->countRoadSegments() - 1);
     while (true) {
         int randIndex = intDistribution(Car::generator);
+        assert(randIndex >= 0 && randIndex < G->countRoadSegments());
         RoadSegment *r = G->getRoadSegment(G->getRoadSegmentID(randIndex));
         if (r->getCapacity() - r->getFlow() >= 1) return r;
     }

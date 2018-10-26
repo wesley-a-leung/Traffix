@@ -115,66 +115,66 @@ bool Point2D::operator != (const Point2D &that) const {
 /**
  * Compares two points by x-coordinate. Less than comparator.
  */
-bool Point2D::xOrderLt(const Point2D &p, const Point2D &q) { return q.x - p.x < EPS; }
+bool Point2D::xOrderLt(const Point2D &p, const Point2D &q) { return p.x < q.x - EPS; }
 
 /**
  * Compares two points by x-coordinate. Less than or equal to comparator.
  */
-bool Point2D::xOrderLe(const Point2D &p, const Point2D &q) { return q.x - p.x <= -EPS; }
+bool Point2D::xOrderLe(const Point2D &p, const Point2D &q) { return p.x <= q.x + EPS; }
 
 /**
  * Compares two points by x-coordinate. Greater than comparator.
  */
-bool Point2D::xOrderGt(const Point2D &p, const Point2D &q) { return p.x - q.x < EPS; }
+bool Point2D::xOrderGt(const Point2D &p, const Point2D &q) { return p.x > q.x + EPS; }
 
 /**
  * Compares two points by x-coordinate. Greater than or equal to comparator.
  */
-bool Point2D::xOrderGe(const Point2D &p, const Point2D &q) { return p.x - q.x <= -EPS; }
+bool Point2D::xOrderGe(const Point2D &p, const Point2D &q) { return p.x >= q.x - EPS; }
 
 // Y ORDER
 
 /**
  * Compares two points by y-coordinate. Less than comparator.
  */
-bool Point2D::yOrderLt(const Point2D &p, const Point2D &q) { return q.y - p.y < EPS; }
+bool Point2D::yOrderLt(const Point2D &p, const Point2D &q) { return p.y < q.y - EPS; }
 
 /**
  * Compares two points by y-coordinate. Less than or equal to comparator.
  */
-bool Point2D::yOrderLe(const Point2D &p, const Point2D &q) { return q.y - p.y <= -EPS; }
+bool Point2D::yOrderLe(const Point2D &p, const Point2D &q) { return p.y <= q.y + EPS; }
 
 /**
  * Compares two points by y-coordinate. Greater than comparator.
  */
-bool Point2D::yOrderGt(const Point2D &p, const Point2D &q) { return p.y - q.y < EPS; }
+bool Point2D::yOrderGt(const Point2D &p, const Point2D &q) { return p.y > q.y + EPS; }
 
 /**
  * Compares two points by y-coordinate. Greater than or equal to comparator.
  */
-bool Point2D::yOrderGe(const Point2D &p, const Point2D &q) { return p.y - q.y <= -EPS; }
+bool Point2D::yOrderGe(const Point2D &p, const Point2D &q) { return p.y >= q.y - EPS; }
 
 // DISTANCETO ORDER
 
 /**
  * Compares two points by distance to this point. Less than comparator.
  */
-bool Point2D::distanceToOrderLt(const Point2D &p, const Point2D &q) const { return distanceSquaredTo(q) - distanceSquaredTo(p) < EPS; }
+bool Point2D::distanceToOrderLt(const Point2D &p, const Point2D &q) const { return distanceSquaredTo(p) < distanceSquaredTo(q) - EPS; }
 
 /**
  * Compares two points by distance to this point. Less than or equal to comparator.
  */
-bool Point2D::distanceToOrderLe(const Point2D &p, const Point2D &q) const { return distanceSquaredTo(q) - distanceSquaredTo(p) <= -EPS; }
+bool Point2D::distanceToOrderLe(const Point2D &p, const Point2D &q) const { return distanceSquaredTo(p) <= distanceSquaredTo(q) + EPS; }
 
 /**
  * Compares two points by distance to this point. Greater than comparator.
  */
-bool Point2D::distanceToOrderGt(const Point2D &p, const Point2D &q) const { return distanceSquaredTo(p) - distanceSquaredTo(q) < EPS; }
+bool Point2D::distanceToOrderGt(const Point2D &p, const Point2D &q) const { return distanceSquaredTo(p) > distanceSquaredTo(q) + EPS; }
 
 /**
  * Compares two points by distance to this point. Greater than or equal to comparator.
  */
-bool Point2D::distanceToOrderGe(const Point2D &p, const Point2D &q) const { return distanceSquaredTo(p) - distanceSquaredTo(q) <= -EPS; }
+bool Point2D::distanceToOrderGe(const Point2D &p, const Point2D &q) const { return distanceSquaredTo(p) >= distanceSquaredTo(q) - EPS; }
 
 // ATAN2ORDER
 
@@ -182,25 +182,25 @@ bool Point2D::distanceToOrderGe(const Point2D &p, const Point2D &q) const { retu
  * Compares two points by atan2() angle (between -pi and pi) with respect to this point.
  * Less than comparator.
  */
-bool Point2D::atan2OrderLt(const Point2D &p, const Point2D &q) const { return angleTo(q) - angleTo(p) < EPS; }
+bool Point2D::atan2OrderLt(const Point2D &p, const Point2D &q) const { return angleTo(p) < angleTo(q) - EPS; }
 
 /**
  * Compares two points by atan2() angle (between -pi and pi) with respect to this point.
  * Less than or equal to comparator.
  */
-bool Point2D::atan2OrderLe(const Point2D &p, const Point2D &q) const { return angleTo(q) - angleTo(p) <= -EPS; }
+bool Point2D::atan2OrderLe(const Point2D &p, const Point2D &q) const { return angleTo(p) <= angleTo(q) + EPS; }
 
 /**
  * Compares two points by atan2() angle (between -pi and pi) with respect to this point.
  * Greater than comparator.
  */
-bool Point2D::atan2OrderGt(const Point2D &p, const Point2D &q) const { return angleTo(p) - angleTo(q) < EPS; }
+bool Point2D::atan2OrderGt(const Point2D &p, const Point2D &q) const { return angleTo(p) > angleTo(q) + EPS; }
 
 /**
  * Compares two points by atan2() angle (between -pi and pi) with respect to this point.
  * Greater than or equal to comparator.
  */
-bool Point2D::atan2OrderGe(const Point2D &p, const Point2D &q) const { return angleTo(p) - angleTo(q) <= -EPS; }
+bool Point2D::atan2OrderGe(const Point2D &p, const Point2D &q) const { return angleTo(p) >= angleTo(q) - EPS; }
 
 size_t Point2D_hash::operator ()(const Point2D &p) const  {
     return 31 * hash<double> {}(p.x) + hash<double> {}(p.y);

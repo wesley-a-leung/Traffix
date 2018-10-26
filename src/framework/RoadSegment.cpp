@@ -258,11 +258,19 @@ double RoadSegment::getDirection() const {
 bool RoadSegment::operator == (const RoadSegment &r) const { return id == r.id; }
 
 /**
+ * Compares this RoadSegment to that RoadSegment r by comparing their ids.
+ *
+ * @param  r the other road segment
+ * @return true if and only if this road segment does not equal the other, false otherwise
+ */
+bool RoadSegment::operator != (const RoadSegment &r) const { return id != r.id; }
+
+/**
  * Compares RoadSegment r to RoadSegment s by comparing their directional angle (between -pi and pi).
  * Less than comparator.
  */
 bool RoadSegment::RoadSegmentPtrPolarOrderCmpLt(const RoadSegment *r, const RoadSegment *s) {
-    return s->getDirection() - r->getDirection() < EPS;
+    return r->getDirection() < s->getDirection() - EPS;
 }
 
 /**
@@ -270,7 +278,7 @@ bool RoadSegment::RoadSegmentPtrPolarOrderCmpLt(const RoadSegment *r, const Road
  * Less than or equal to comparator.
  */
 bool RoadSegment::RoadSegmentPtrPolarOrderCmpLe(const RoadSegment *r, const RoadSegment *s) {
-    return s->getDirection() - r->getDirection() < -EPS;
+    return r->getDirection() <= s->getDirection() + EPS;
 }
 
 /**
@@ -278,7 +286,7 @@ bool RoadSegment::RoadSegmentPtrPolarOrderCmpLe(const RoadSegment *r, const Road
  * Grater than comparator.
  */
 bool RoadSegment::RoadSegmentPtrPolarOrderCmpGt(const RoadSegment *r, const RoadSegment *s) {
-    return r->getDirection() - s->getDirection() < EPS;
+    return r->getDirection() > s->getDirection() + EPS;
 }
 
 /**
@@ -286,5 +294,5 @@ bool RoadSegment::RoadSegmentPtrPolarOrderCmpGt(const RoadSegment *r, const Road
  * Grater than comparator.
  */
 bool RoadSegment::RoadSegmentPtrPolarOrderCmpGe(const RoadSegment *r, const RoadSegment *s) {
-    return r->getDirection() - s->getDirection() < -EPS;
+    return r->getDirection() >= s->getDirection() - EPS;
 }
